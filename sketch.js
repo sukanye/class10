@@ -56,31 +56,3 @@ var Adata = function(localHeight) {
   }
 }
 
-function setup() {
-  for (var i = 0; i < dataLength; i++) {
-    dataArr.push(new Adata(data[i]));
-  }
-  createCanvas(500,500);
-  dataArrLength = dataArr.length;
-}
-
-function draw() {
-  background('#333');
-  for (var i = 0; i < dataArrLength; i++){
-    dataArr[i].render(i);
-  }
-
-  fill("#fefefe");
-  textSize(22);
-  // textFont("Bangers")
-  text(dataValueText, 20, 100);
-
-hit=collidePointRect(mouseX,mouseY,x,height,this.width,this.dramaticHeight);
-
-if(hit){
-  fill("#fefefe");
-  textSize(22);
-  text(dataValueText,20,100);
-}
-
-}
