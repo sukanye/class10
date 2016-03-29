@@ -1,4 +1,3 @@
-var hit=false;
 var dataLength = data.length;
 var dataArr = [];
 var dataArrLength = dataArr.length;
@@ -8,9 +7,9 @@ var dataValueText = "Hover over match stick head to see values";
 var Adata = function(localHeight) {
   this.height = localHeight;
   this.width = 10;
-  this.dramaticHeight = this.height * -5;
+  this.dramaticHeight = this.height * -5
 
-  var circleWidth = this.width * 2;
+  var circleWidth = this.width * 2
 
   this.renderRect = function(x) {
     fill("#bada55");
@@ -22,9 +21,15 @@ var Adata = function(localHeight) {
     ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth);
   };
 
-  this.isMouseCloseToCircle = function(posnX, posnY, x) {
-    if (dist(posnX, posnY, x, height + this.dramaticHeight) < circleWidth) {
-      dataValueText = this.height;
+  this.isMouseOnCircle = function(x) {
+    if (collideRectCircle((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth,mouseX, mouseY, 0)) {
+      dataValueText = this.height
+    }
+  }
+  
+  this.isMouseOnRect = function(x) {
+    if(collideRectRect((x) + (this.width / 2), height + this.dramaticHeight, width, width, mouseX, mouseY, 0)) { 
+      dataValueText = this.height
     }
   }
 
@@ -32,16 +37,8 @@ var Adata = function(localHeight) {
     var x = iterator * 10;
     this.renderRect(x);
     this.renderCircleTop(x);
-    this.isMouseCloseToCircle(mouseX, mouseY, x);
-  }
-  
-  this.isHit = function() {
-    var hit = false;
-    hit = collidePointRect(mouseX,mouseY,x,y,w,h);
-    
-    if(hit){
-      hit = true; 
-    }
+    this.isMouseOnCircle(x);
+    this.isMouseOnRect(x);
   }
 }
 
@@ -53,16 +50,14 @@ function setup() {
   dataArrLength = dataArr.length;
 }
 
-
 function draw() {
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
     dataArr[i].render(i);
   }
 
-  fill("#fefefe");
-  textSize(22);
+  fill("#fefefe")
+  textSize(22)
   // textFont("Bangers")
   text(dataValueText, 20, 100);
-
 }
