@@ -9,7 +9,14 @@ var Adata = function(localHeight) {
   this.width = 10;
   this.dramaticHeight = this.height * -5
 
-  var circleWidth = this.width * 2
+  var circleWidth = this.width * 2;
+  
+  this.figureOutRect = function(x){
+    rectObject= {}
+    rectObject.x = x;
+    rectObject.y = height;
+    rectObject.
+  }
 
   this.renderRect = function(x) {
     fill("#bada55");
@@ -28,8 +35,8 @@ var Adata = function(localHeight) {
   }
   
   this.isMouseOnRect = function(x) {
-    if(collideRectRect((x) + (this.width / 2), height + this.dramaticHeight, width, width, mouseX, mouseY, 0)) { 
-      dataValueText = this.height
+    if(collidePointRect(mouseX, mouseY, x,height-this.dramaticHeight,this.width, this.dramaticHeight)){
+      dataValueText= this.height;
     }
   }
 
@@ -38,7 +45,7 @@ var Adata = function(localHeight) {
     this.renderRect(x);
     this.renderCircleTop(x);
     this.isMouseOnCircle(x);
-    this.isMouseOnRect(x);
+    this.isMouseOnRect(x); //x is the index, x position
   }
 }
 
