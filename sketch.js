@@ -34,6 +34,15 @@ var Adata = function(localHeight) {
     this.renderCircleTop(x);
     this.isMouseCloseToCircle(mouseX, mouseY, x);
   }
+  
+  this.isHit = function() {
+    var hit = false;
+    hit = collidePointRect(mouseX,mouseY,x,y,w,h);
+    
+    if(hit){
+      hit = true; 
+    }
+  }
 }
 
 function setup() {
@@ -44,21 +53,11 @@ function setup() {
   dataArrLength = dataArr.length;
 }
 
-var isHit = function() {
-  var hit = false;
-  
-    rect(20,20,100,150);
-
-    //hit = collidePointRect(mouseX,mouseY,200,200,100,150);
-
-    print("colliding? " + hit);
-}
 
 function draw() {
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
     dataArr[i].render(i);
-    //isHit();
   }
 
   fill("#fefefe");
