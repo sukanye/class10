@@ -4,26 +4,6 @@ var dataArr = [];
 var dataArrLength = dataArr.length;
 var dataValueText = "Hover over match stick head to see values";
 
-function setup() {
-  for(var i = 0; i < dataLength; i++) {
-    dataArr.push(new aData(data[i])); //applies aData to data; turns data values into heights 
-  }
-  
-  createCanvas(500,500);
-  dataArrLength= dataArr.length; //initialising it here so the code doesnt keep calculating the array
-}
-
-function draw() {
-  background('#333');
-  for(var i = 0; i < dataArrLength; i++){ //dataArrLength <<<
-    dataArr[i].render(i);
-  }
-  
-  fill("#fefefe");
-  //textFont("NAME OF FONT") add url into html
-  text("Intro Text", 20, 1000);
-}
-
 
 var Adata = function(localHeight) {
   this.height = localHeight;
@@ -56,3 +36,34 @@ var Adata = function(localHeight) {
   }
 }
 
+function setup() {
+  for (var i = 0; i < dataLength; i++) {
+    dataArr.push(new Adata(data[i]));
+  }
+  createCanvas(500,500);
+  dataArrLength = dataArr.length;
+}
+
+var isHit = function() {
+  var hit = false;
+  
+    rect(20,20,100,150);
+
+    //hit = collidePointRect(mouseX,mouseY,200,200,100,150);
+
+    print("colliding? " + hit);
+}
+
+function draw() {
+  background('#333');
+  for (var i = 0; i < dataArrLength; i++){
+    dataArr[i].render(i);
+    //isHit();
+  }
+
+  fill("#fefefe");
+  textSize(22);
+  // textFont("Bangers")
+  text(dataValueText, 20, 100);
+
+}
