@@ -2,52 +2,45 @@ var dataLength = data.length;
 var dataArr = [];
 var dataArrLength = dataArr.length;
 var dataValueText = "Hover over match stick head to see values";
+var hit = false;
 
 
 var Adata = function(localHeight) {
   this.height = localHeight;
   this.width = 10;
-  this.dramaticHeight = this.height * -5
+  this.dramaticHeight = this.height * 5
 
   var circleWidth = this.width * 2;
-  
-  this.figureOutRect = function(x){
-    rectObject= {}
-    rectObject.x = x;
-    rectObject.y = height;
-    rectObject.
-  }
 
-  this.renderRect = function(x) {
-    fill("#bada55");
+this.isMouseOnRect = function(x) {
+    hit= collidePointRect(mouseX, mouseY, x,height-this.dramaticHeight,this.width, this.dramaticHeight)
+      if(hit) {
+        dataValueText= this.height;
+        fill('red');
+      } else {
+        fill('#bada55');
+      }
     rect(x,height,this.width,this.dramaticHeight);
   };
 
-  this.renderCircleTop = function(x) {
-    fill("hotpink");
-    ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth);
-  };
-
   this.isMouseOnCircle = function(x) {
-    if (collideRectCircle((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth,mouseX, mouseY, 0)) {
-      dataValueText = this.height
-    }
-  }
-  
-  this.isMouseOnRect = function(x) {
-    if(collidePointRect(mouseX, mouseY, x,height-this.dramaticHeight,this.width, this.dramaticHeight)){
-      dataValueText= this.height;
-    }
+    hit= collidePointCircle(mouseX, mouseY,(x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth);
+      if(hit) {
+        dataValueText= this.height;
+        fill('red');
+      } else {
+        fill('hotpink');
+      }
+    rect(x,height,this.width,this.dramaticHeight);
   }
 
   this.render = function(iterator) {
     var x = iterator * 10;
-    this.renderRect(x);
-    this.renderCircleTop(x);
     this.isMouseOnCircle(x);
-    this.isMouseOnRect(x); //x is the index, x position
+    this.isMouseOnRect(x);
   }
 }
+console.log("read");
 
 function setup() {
   for (var i = 0; i < dataLength; i++) {
@@ -63,8 +56,10 @@ function draw() {
     dataArr[i].render(i);
   }
 
-  fill("#fefefe")
-  textSize(22)
-  // textFont("Bangers")
+  fill('black');
+  textSize(22);
+  textFont("Bangers");
   text(dataValueText, 20, 100);
+  
+  
 }
